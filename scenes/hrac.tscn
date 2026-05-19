@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://begkn2du7yuxh"]
+
+[ext_resource type="Texture2D" uid="uid://04ft3tk7kd7t" path="res://assets/lode/lod.png" id="1_6qjae"]
+[ext_resource type="Script" uid="uid://clnevuyn7i4wp" path="res://scripts/player.gd" id="1_8enfh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8enfh"]
+
+[node name="Hrac" type="CharacterBody2D" unique_id=1002693871]
+script = ExtResource("1_8enfh")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1867130228]
+texture = ExtResource("1_6qjae")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=718152395]
+shape = SubResource("CircleShape2D_8enfh")

@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bftyniq1loxf1"]
+
+[ext_resource type="Script" uid="uid://clnevuyn7i4wp" path="res://scripts/player.gd" id="1_vvjac"]
+[ext_resource type="Script" uid="uid://slq3bc48tijp" path="res://scripts/starfield.gd" id="2_ofywm"]
+
+[node name="Game" type="Node2D" unique_id=840055045]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1913693576]
+offset_left = -1953.0
+offset_top = -1873.0
+offset_right = 2047.0
+offset_bottom = 2040.0
+color = Color(0, 0, 0, 1)
+
+[node name="StarField" type="Node2D" parent="." unique_id=151022573]
+script = ExtResource("2_ofywm")
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1397677048]
+script = ExtResource("1_vvjac")
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=507989514]

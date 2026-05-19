@@ -1,2 +1,3 @@
-res://pohyb_hrace.gd
-res://pohyb_hrace.tscn
+res://scenes/hrac.tscn
+res://scenes/Menu.tscn
+res://scenes/Game.tscn
