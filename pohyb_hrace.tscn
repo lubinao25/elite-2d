@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bftyniq1loxf1"]
+
+[ext_resource type="Script" uid="uid://cdybuukxvh6iw" path="res://pohyb_hrace.gd" id="1_xtmhq"]
+[ext_resource type="Texture2D" uid="uid://04ft3tk7kd7t" path="res://lod.png" id="2_l6yda"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_arkst"]
+radius = 16.124516
+
+[node name="player" type="CharacterBody2D" unique_id=1915930510]
+script = ExtResource("1_xtmhq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=314334012]
+shape = SubResource("CircleShape2D_arkst")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=505763061]
+
+[node name="Lod" type="Sprite2D" parent="." unique_id=697027810]
+texture = ExtResource("2_l6yda")
