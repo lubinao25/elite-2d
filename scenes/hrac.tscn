@@ -4,14 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://brbvv3xouu5o3" path="res://assets/lode/SpaceShip.png" id="2_8enfh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8enfh"]
-radius = 13.0
+radius = 18.0
 
 [node name="Hrac" type="CharacterBody2D" unique_id=1002693871]
 script = ExtResource("1_8enfh")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1867130228]
-position = Vector2(-1.1920929e-07, 0)
-scale = Vector2(0.0310553, 0.029293466)
+position = Vector2(0, 2.3841858e-07)
+scale = Vector2(0.04356503, 0.035390038)
 texture = ExtResource("2_8enfh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=718152395]

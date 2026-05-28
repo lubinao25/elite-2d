@@ -4,15 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://dqn63qdkhy8u3" path="res://assets/lode/SpaceStation.png" id="2_qisfu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1"]
-radius = 33.003788
+radius = 41.5
 
 [node name="SpaceStation" type="Area2D" unique_id=1]
 scale = Vector2(2, 2)
 script = ExtResource("1_station")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1823226890]
-position = Vector2(0, -5.9604645e-08)
-scale = Vector2(0.048339836, 0.048339844)
+scale = Vector2(0.06026204, 0.060262047)
 texture = ExtResource("2_qisfu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2]
