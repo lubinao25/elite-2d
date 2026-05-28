@@ -8,17 +8,6 @@ extends CharacterBody2D
 var current_speed: float = 0.0
 var direction: float = 0.0
 
-func _ready():
-	# Draw the ship as a white triangle
-	var polygon = Polygon2D.new()
-	polygon.polygon = PackedVector2Array([
-		Vector2(0, -15),      # Top point (nose)
-		Vector2(-10, 15),     # Bottom left
-		Vector2(10, 15)       # Bottom right
-	])
-	polygon.color = Color.WHITE
-	add_child(polygon)
-
 func _process(delta):
 	# Handle rotation
 	if Input.is_action_pressed("left"):

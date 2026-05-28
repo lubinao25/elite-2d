@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://04ft3tk7kd7t"
-path="res://.godot/imported/lod.png-6f6959121df564d63883fd0abdc89819.ctex"
+uid="uid://dqn63qdkhy8u3"
+path="res://.godot/imported/SpaceStation.png-72b53ab77db60f1ec909741cae987aaa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/lode/lod.png"
-dest_files=["res://.godot/imported/lod.png-6f6959121df564d63883fd0abdc89819.ctex"]
+source_file="res://assets/lode/SpaceStation.png"
+dest_files=["res://.godot/imported/SpaceStation.png-72b53ab77db60f1ec909741cae987aaa.ctex"]
 
 [params]
 

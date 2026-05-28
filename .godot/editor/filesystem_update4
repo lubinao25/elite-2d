@@ -1,3 +1,7 @@
 res://scenes/hrac.tscn
 res://scenes/Menu.tscn
+res://scripts/player.gd
+res://scripts/starfield.gd
 res://scenes/Game.tscn
+res://scenes/SpaceStation.tscn
+res://scripts/space_station.gd

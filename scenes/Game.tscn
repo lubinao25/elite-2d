@@ -1,9 +1,12 @@
 [gd_scene format=3 uid="uid://bftyniq1loxf1"]
 
-[ext_resource type="Script" uid="uid://clnevuyn7i4wp" path="res://scripts/player.gd" id="1_vvjac"]
 [ext_resource type="Script" uid="uid://slq3bc48tijp" path="res://scripts/starfield.gd" id="2_ofywm"]
+[ext_resource type="PackedScene" uid="uid://begkn2du7yuxh" path="res://scenes/hrac.tscn" id="3_cpr0p"]
+[ext_resource type="Script" uid="uid://b82588s0io6wl" path="res://scripts/universe_background.gd" id="3_universe"]
+[ext_resource type="PackedScene" uid="uid://c8xyzabc1234" path="res://scenes/SpaceStation.tscn" id="4_station"]
 
 [node name="Game" type="Node2D" unique_id=840055045]
+script = ExtResource("3_universe")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1913693576]
 offset_left = -1953.0
@@ -15,7 +18,9 @@ color = Color(0, 0, 0, 1)
 [node name="StarField" type="Node2D" parent="." unique_id=151022573]
 script = ExtResource("2_ofywm")
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=1397677048]
-script = ExtResource("1_vvjac")
+[node name="Hrac" parent="." unique_id=1002693871 instance=ExtResource("3_cpr0p")]
 
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=507989514]
+[node name="Camera2D" type="Camera2D" parent="Hrac" unique_id=49297667]
+
+[node name="SpaceStation1" parent="." instance=ExtResource("4_station") unique_id=1775432564]
+position = Vector2(500, 0)
