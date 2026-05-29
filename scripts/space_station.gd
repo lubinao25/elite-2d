@@ -2,12 +2,20 @@ extends Area2D
 
 @export var station_name: String = "Space Station Alpha"
 @export var poi_distance_from_edge: float = 30.0
+@export var fuel_price: float = 5.0
+@export var repair_price: float = 10.0
+@export var docking_distance: float = 200.0
 
 var camera: Camera2D
 var poi: Node2D
+var is_player_docking: bool = false
 
 func _ready():
 	_create_poi()
+	if StationManager:
+		StationManager.register_station(self)
+	area_entered.connect(_on_area_entered)
+	area_exited.connect(_on_area_exited)
 
 func _create_poi():
 	poi = Node2D.new()
@@ -58,10 +66,17 @@ func _update_poi_position():
 		var direction_to_station = (station_screen_pos - clamped_pos).normalized()
 		poi.rotation = direction_to_station.angle() + PI/2
 
-func _on_body_entered(body):
-	if body.name == "Hrac":
-		print("Player reached station: " + station_name)
-
 func _on_area_entered(area):
 	if area.name == "Hrac":
 		print("Player near station: " + station_name)
+		is_player_docking = true
+
+func _on_area_exited(area):
+	if area.name == "Hrac":
+		is_player_docking = false
+
+func get_distance_to_player() -> float:
+	var player = get_tree().root.get_node_or_null("Game/Hrac")
+	if player:
+		return global_position.distance_to(player.global_position)
+	return INF

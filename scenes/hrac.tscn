@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://clnevuyn7i4wp" path="res://scripts/player.gd" id="1_8enfh"]
 [ext_resource type="Texture2D" uid="uid://brbvv3xouu5o3" path="res://assets/lode/SpaceShip.png" id="2_8enfh"]
+[ext_resource type="Script" uid="uid://cqunhjrxj7xhv" path="res://scripts/hud_manager.gd" id="3_hud"]
+[ext_resource type="Script" uid="uid://c03nj43yxv27u" path="res://scripts/minimap_manager.gd" id="4_minimap"]
+[ext_resource type="Script" uid="uid://poi_renderer_uid" path="res://scripts/poi_renderer.gd" id="5_poi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8enfh"]
 radius = 18.0
@@ -16,3 +19,92 @@ texture = ExtResource("2_8enfh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=718152395]
 shape = SubResource("CircleShape2D_8enfh")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=926534211]
+layer = 100
+
+[node name="HUD" type="Control" parent="CanvasLayer" unique_id=841029385]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_hud")
+
+[node name="MinimapContainer" type="Control" parent="CanvasLayer/HUD" unique_id=123456789]
+custom_minimum_size = Vector2(200, 200)
+anchors_preset = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 210.0
+offset_bottom = 210.0
+
+[node name="MinimapPanel" type="Control" parent="CanvasLayer/HUD/MinimapContainer" unique_id=234567890]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_minimap")
+
+[node name="POIRenderer" type="Control" parent="CanvasLayer/HUD/MinimapContainer/MinimapPanel" unique_id=345671234]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_poi")
+
+[node name="TopRightStats" type="VBoxContainer" parent="CanvasLayer/HUD" unique_id=345678901]
+layout_mode = 0
+offset_left = 1210.0
+offset_top = 10.0
+offset_right = 1390.0
+offset_bottom = 100.0
+size_flags_horizontal = 8
+
+[node name="FuelLabel" type="Label" parent="CanvasLayer/HUD/TopRightStats" unique_id=456789012]
+layout_mode = 2
+text = "Fuel: 1000 / 1000"
+
+[node name="SpeedLabel" type="Label" parent="CanvasLayer/HUD/TopRightStats" unique_id=567890123]
+layout_mode = 2
+text = "Speed: 0"
+
+[node name="BottomLeftStats" type="VBoxContainer" parent="CanvasLayer/HUD" unique_id=678901234]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 590.0
+offset_right = 300.0
+offset_bottom = 710.0
+
+[node name="HealthLabel" type="Label" parent="CanvasLayer/HUD/BottomLeftStats" unique_id=789012345]
+layout_mode = 2
+text = "Health: 100 / 100"
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer/HUD/BottomLeftStats" unique_id=890123456]
+layout_mode = 2
+value = 100.0
+
+[node name="ShieldLabel" type="Label" parent="CanvasLayer/HUD/BottomLeftStats" unique_id=901234567]
+layout_mode = 2
+text = "Shield: 100 / 100"
+
+[node name="ShieldBar" type="ProgressBar" parent="CanvasLayer/HUD/BottomLeftStats" unique_id=12345678]
+layout_mode = 2
+value = 100.0
+
+[node name="BottomRightStats" type="VBoxContainer" parent="CanvasLayer/HUD" unique_id=123456701]
+layout_mode = 0
+offset_left = 1210.0
+offset_top = 590.0
+offset_right = 1390.0
+offset_bottom = 710.0
+size_flags_horizontal = 8
+
+[node name="MoneyLabel" type="Label" parent="CanvasLayer/HUD/BottomRightStats" unique_id=234567812]
+layout_mode = 2
+text = "Money: 1000"

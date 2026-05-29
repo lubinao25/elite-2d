@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dqn63qdkhy8u3" path="res://assets/lode/SpaceStation.png" id="2_qisfu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1"]
-radius = 41.5
+radius = 150.0
 
 [node name="SpaceStation" type="Area2D" unique_id=1]
 scale = Vector2(2, 2)
