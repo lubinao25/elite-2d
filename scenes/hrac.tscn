@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://brbvv3xouu5o3" path="res://assets/lode/SpaceShip.png" id="2_8enfh"]
 [ext_resource type="Script" uid="uid://cqunhjrxj7xhv" path="res://scripts/hud_manager.gd" id="3_hud"]
 [ext_resource type="Script" uid="uid://c03nj43yxv27u" path="res://scripts/minimap_manager.gd" id="4_minimap"]
-[ext_resource type="Script" uid="uid://poi_renderer_uid" path="res://scripts/poi_renderer.gd" id="5_poi"]
+[ext_resource type="Script" uid="uid://dl77we6q48w1p" path="res://scripts/poi_renderer.gd" id="5_poi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8enfh"]
 radius = 18.0
@@ -60,10 +60,10 @@ script = ExtResource("5_poi")
 
 [node name="TopRightStats" type="VBoxContainer" parent="CanvasLayer/HUD" unique_id=345678901]
 layout_mode = 0
-offset_left = 1210.0
-offset_top = 10.0
-offset_right = 1390.0
-offset_bottom = 100.0
+offset_left = 973.0
+offset_top = 1.0
+offset_right = 1153.0
+offset_bottom = 91.0
 size_flags_horizontal = 8
 
 [node name="FuelLabel" type="Label" parent="CanvasLayer/HUD/TopRightStats" unique_id=456789012]
@@ -76,10 +76,10 @@ text = "Speed: 0"
 
 [node name="BottomLeftStats" type="VBoxContainer" parent="CanvasLayer/HUD" unique_id=678901234]
 layout_mode = 0
-offset_left = 10.0
-offset_top = 590.0
-offset_right = 300.0
-offset_bottom = 710.0
+offset_left = 3.0
+offset_top = 488.0
+offset_right = 293.0
+offset_bottom = 608.0
 
 [node name="HealthLabel" type="Label" parent="CanvasLayer/HUD/BottomLeftStats" unique_id=789012345]
 layout_mode = 2
@@ -99,10 +99,10 @@ value = 100.0
 
 [node name="BottomRightStats" type="VBoxContainer" parent="CanvasLayer/HUD" unique_id=123456701]
 layout_mode = 0
-offset_left = 1210.0
-offset_top = 590.0
-offset_right = 1390.0
-offset_bottom = 710.0
+offset_left = 974.0
+offset_top = 582.0
+offset_right = 1154.0
+offset_bottom = 702.0
 size_flags_horizontal = 8
 
 [node name="MoneyLabel" type="Label" parent="CanvasLayer/HUD/BottomRightStats" unique_id=234567812]
