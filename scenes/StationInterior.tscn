@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bst836x4bdihf"]
+
+[ext_resource type="Script" uid="uid://6axv5up6r8dq" path="res://scripts/station_interior.gd" id="1_interior"]
+
+[node name="StationInterior" type="Node2D" unique_id=1102601463]
+script = ExtResource("1_interior")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1033345205]
+offset_left = -997.0
+offset_top = -997.0
+offset_right = 1003.0
+offset_bottom = 1003.0
+color = Color(0.1, 0.1, 0.2, 1)
+
+[node name="GridLines" type="Node2D" parent="." unique_id=2112801194]

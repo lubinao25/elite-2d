@@ -12,10 +12,13 @@ enum DockingState {
 var current_state: DockingState = DockingState.NORMAL_FLIGHT
 var target_station: Node = null
 var docking_ui: Node = null
+var interior_scene: Node = null
+var in_interior: bool = false
 
 @export var approach_distance: float = 400.0
 @export var door_tolerance: float = 80.0
 @export var landing_distance: float = 50.0
+@export var interior_scene_path: String = "res://scenes/StationInterior.tscn"
 
 signal state_changed(new_state: DockingState)
 signal docking_failed(reason: String)
@@ -111,6 +114,7 @@ func _handle_landing(_delta):
 		if PlayerStats:
 			PlayerStats.update_speed(0.0)
 		player.velocity = Vector2.ZERO
+		_load_interior()
 	elif distance > 200:
 		_fail_docking("Missed landing platform")
 
@@ -126,6 +130,8 @@ func _handle_exit(_delta):
 	var distance = player.global_position.distance_to(target_station.global_position)
 
 	if distance > approach_distance:
+		if in_interior:
+			_unload_interior()
 		set_docking_state(DockingState.NORMAL_FLIGHT)
 		target_station = null
 		print("Exited station successfully!")
@@ -136,6 +142,8 @@ func set_docking_state(new_state: DockingState):
 		state_changed.emit(new_state)
 
 func request_exit_docking():
+	if in_interior:
+		_unload_interior()
 	if current_state == DockingState.DOCKED:
 		set_docking_state(DockingState.DOCKING_EXIT)
 
@@ -146,3 +154,36 @@ func _fail_docking(reason: String):
 		PlayerStats.take_damage(50.0)
 	set_docking_state(DockingState.NORMAL_FLIGHT)
 	target_station = null
+
+func _load_interior():
+	if in_interior:
+		return
+
+	var game = get_tree().root.get_node_or_null("Game")
+	if not game:
+		return
+
+	in_interior = true
+	interior_scene = load(interior_scene_path).instantiate()
+	if interior_scene:
+		game.add_child(interior_scene)
+		print("Interior loaded for %s" % target_station.station_name)
+
+		# Move player to interior
+		var player = get_tree().root.get_node_or_null("Game/Hrac")
+		if player:
+			player.global_position = Vector2(0, 0)
+
+func _unload_interior():
+	if not in_interior or not interior_scene:
+		return
+
+	in_interior = false
+	interior_scene.queue_free()
+	interior_scene = null
+	print("Interior unloaded")
+
+	# Move player back to exterior
+	var player = get_tree().root.get_node_or_null("Game/Hrac")
+	if player and target_station:
+		player.global_position = target_station.global_position + Vector2(150, 0)

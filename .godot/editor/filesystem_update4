@@ -1,0 +1,4 @@
+res://scenes/SpaceStation.tscn
+res://scenes/Game.tscn
+res://scripts/docking_manager.gd
+res://scenes/StationInterior.tscn
