@@ -70,9 +70,16 @@ size_flags_horizontal = 8
 layout_mode = 2
 text = "Fuel: 1000 / 1000"
 
+[node name="FuelBar" type="ProgressBar" parent="CanvasLayer/HUD/TopRightStats" unique_id=555555555]
+layout_mode = 2
+value = 100.0
+
 [node name="SpeedLabel" type="Label" parent="CanvasLayer/HUD/TopRightStats" unique_id=567890123]
 layout_mode = 2
-text = "Speed: 0"
+text = "Rychlost: 0"
+
+[node name="SpeedBar" type="ProgressBar" parent="CanvasLayer/HUD/TopRightStats" unique_id=666666666]
+layout_mode = 2
 
 [node name="BottomLeftStats" type="VBoxContainer" parent="CanvasLayer/HUD" unique_id=678901234]
 layout_mode = 0

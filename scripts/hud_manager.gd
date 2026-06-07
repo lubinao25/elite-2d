@@ -1,7 +1,9 @@
 extends Control
 
 @onready var fuel_label = $TopRightStats/FuelLabel
+@onready var fuel_bar = $TopRightStats/FuelBar
 @onready var speed_label = $TopRightStats/SpeedLabel
+@onready var speed_bar = $TopRightStats/SpeedBar
 @onready var health_label = $BottomLeftStats/HealthLabel
 @onready var health_bar = $BottomLeftStats/HealthBar
 @onready var shield_label = $BottomLeftStats/ShieldLabel
@@ -18,12 +20,16 @@ func _ready():
 
 		health_bar.max_value = PlayerStats.max_health
 		shield_bar.max_value = PlayerStats.max_shield
+		fuel_bar.max_value = PlayerStats.max_fuel
+		speed_bar.max_value = 300.0  # Same as max_speed from player
 
 func _on_fuel_changed(new_fuel: float):
 	fuel_label.text = "Fuel: %.0f / %.0f" % [new_fuel, PlayerStats.max_fuel]
+	fuel_bar.value = new_fuel
 
 func _on_speed_changed(new_speed: float):
 	speed_label.text = "Speed: %.0f" % new_speed
+	speed_bar.value = new_speed
 
 func _on_health_changed(new_health: float):
 	health_label.text = "Health: %.0f / %.0f" % [new_health, PlayerStats.max_health]

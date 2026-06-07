@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
 @export var max_speed: float = 300.0
-@export var acceleration: float = 500.0
+@export var acceleration: float = 150.0
+@export var deceleration: float = 150.0
 @export var rotation_speed: float = 3.5
-@export var friction: float = 200.0
 @export var fire_rate: float = 0.2
 @export var bullet_damage: float = 10.0
 
@@ -23,21 +23,20 @@ func _process(delta):
 	if Input.is_action_pressed("right"):
 		rotation -= rotation_speed * delta
 
-	# Handle acceleration/deceleration
-	var acceleration_input = 0.0
+	# Handle speed changes with W and S keys
 	if Input.is_action_pressed("up"):
-		acceleration_input = 1.0
+		# Accelerate forward (W key)
+		current_speed = move_toward(current_speed, max_speed, acceleration * delta)
 	elif Input.is_action_pressed("down"):
-		acceleration_input = -1.0
-
-	# Update speed
-	if acceleration_input != 0.0:
-		current_speed = move_toward(current_speed, max_speed * acceleration_input, acceleration * delta)
+		# Decelerate or go in reverse (S key)
+		current_speed = move_toward(current_speed, -max_speed, deceleration * delta)
 	else:
-		current_speed = move_toward(current_speed, 0.0, friction * delta)
+		# Speed remains constant when no input
+		pass
 
-	# Consume fuel based on movement
+	# Consume fuel based on current speed
 	if current_speed != 0.0 and PlayerStats:
+		# Higher speed = higher fuel consumption
 		var fuel_cost = PlayerStats.fuel_consumption_rate * delta * (abs(current_speed) / max_speed)
 		if not PlayerStats.consume_fuel(fuel_cost):
 			current_speed = 0.0

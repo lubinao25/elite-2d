@@ -1,4 +1,3 @@
+res://scripts/hud_manager.gd
+res://scripts/player.gd
 res://scenes/hrac.tscn
-res://scripts/space_station.gd
-res://scenes/Game.tscn
-res://scenes/Bullet.tscn
