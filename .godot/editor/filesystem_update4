@@ -1,3 +1,4 @@
-res://scripts/hud_manager.gd
-res://scripts/player.gd
-res://scenes/hrac.tscn
+res://scenes/SpaceStation.tscn
+res://scenes/Game.tscn
+res://scripts/docking_manager.gd
+res://scenes/StationInterior.tscn

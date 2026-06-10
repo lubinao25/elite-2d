@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://station_interface"]
+
+[ext_resource type="Script" uid="uid://station_int_script" path="res://scripts/station_interface.gd" id="1_interface"]
+
+[node name="StationInterface" type="CanvasLayer" unique_id=1]
+layer = 101
+script = ExtResource("1_interface")
+
+[node name="Panel" type="Panel" parent="." unique_id=2]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -250.0
+offset_right = 300.0
+offset_bottom = 250.0
+custom_minimum_size = Vector2(600, 500)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=3]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+
+[node name="StationName" type="Label" parent="Panel/VBoxContainer" unique_id=4]
+layout_mode = 2
+text = "Station Name"
+horizontal_alignment = 1
+
+[node name="RefuelButton" type="Button" parent="Panel/VBoxContainer" unique_id=5]
+layout_mode = 2
+text = "Refuel (+100 Fuel, -50 Money)"
+
+[node name="RepairButton" type="Button" parent="Panel/VBoxContainer" unique_id=6]
+layout_mode = 2
+text = "Repair (+50 Health, -100 Money)"
+
+[node name="MissionsButton" type="Button" parent="Panel/VBoxContainer" unique_id=7]
+layout_mode = 2
+text = "View Missions"
+
+[node name="ExitButton" type="Button" parent="Panel/VBoxContainer" unique_id=8]
+layout_mode = 2
+text = "Exit Station"
+
+[node name="MissionsPanel" type="Panel" parent="Panel/VBoxContainer" unique_id=9]
+layout_mode = 2
+visible = false
+custom_minimum_size = Vector2(0, 150)
+
+[node name="MissionsList" type="VBoxContainer" parent="Panel/VBoxContainer/MissionsPanel" unique_id=10]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0

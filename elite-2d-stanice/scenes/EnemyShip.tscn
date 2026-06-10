@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://enemy"]
+
+[ext_resource type="Script" uid="uid://enemy_script" path="res://scripts/enemy_ship.gd" id="1_enemy"]
+[ext_resource type="Texture2D" uid="uid://brbvv3xouu5o3" path="res://assets/lode/SpaceShip.png" id="2_ship"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_enemy"]
+radius = 18.0
+
+[node name="EnemyShip" type="CharacterBody2D" unique_id=1]
+script = ExtResource("1_enemy")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(0.04356503, 0.035390038)
+texture = ExtResource("2_ship")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=3]
+shape = SubResource("CircleShape2D_enemy")
