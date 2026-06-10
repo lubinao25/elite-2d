@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://bftyniq1loxf1"]
+
+[ext_resource type="Script" uid="uid://slq3bc48tijp" path="res://scripts/starfield.gd" id="2_ofywm"]
+[ext_resource type="PackedScene" uid="uid://begkn2du7yuxh" path="res://scenes/hrac.tscn" id="3_cpr0p"]
+[ext_resource type="Script" uid="uid://b82588s0io6wl" path="res://scripts/universe_background.gd" id="3_universe"]
+[ext_resource type="PackedScene" uid="uid://rpdliidel3le" path="res://scenes/SpaceStation.tscn" id="4_station"]
+[ext_resource type="PackedScene" path="res://scenes/StationInterface.tscn" id="5_interface"]
+
+[node name="Game" type="Node2D" unique_id=840055045]
+script = ExtResource("3_universe")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1913693576]
+offset_left = -1789.0
+offset_top = -1912.0
+offset_right = 2211.0
+offset_bottom = 2001.0
+color = Color(0, 0, 0, 1)
+
+[node name="StarField" type="Node2D" parent="." unique_id=151022573]
+script = ExtResource("2_ofywm")
+
+[node name="Hrac" parent="." unique_id=1002693871 instance=ExtResource("3_cpr0p")]
+position = Vector2(0, 3)
+
+[node name="Camera2D" type="Camera2D" parent="Hrac" unique_id=49297667]
+
+[node name="SpaceStation1" parent="." unique_id=1775432564 instance=ExtResource("4_station")]
+position = Vector2(500, 0)
+station_name = "Station Alpha"
+
+[node name="SpaceStation2" parent="." unique_id=2076739123 instance=ExtResource("4_station")]
+position = Vector2(-800, 300)
+station_name = "Station Beta"
+
+[node name="SpaceStation3" parent="." unique_id=1954110818 instance=ExtResource("4_station")]
+position = Vector2(200, -600)
+station_name = "Station Gamma"
+
+[node name="SpaceStation4" parent="." unique_id=1084075898 instance=ExtResource("4_station")]
+position = Vector2(-400, -800)
+station_name = "Station Delta"
+
+[node name="StationInterface" parent="." unique_id=2147483647 instance=ExtResource("5_interface")]

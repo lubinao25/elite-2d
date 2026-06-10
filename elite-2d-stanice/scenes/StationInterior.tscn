@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bst836x4bdihf"]
+
+[ext_resource type="Script" uid="uid://cmylgh15847ar" path="res://scripts/station_interior.gd" id="1_interior"]
+
+[node name="StationInterior" type="Node2D" unique_id=1102601463]
+script = ExtResource("1_interior")
+
+[node name="GridLines" type="Node2D" parent="." unique_id=2112801194]

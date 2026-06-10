@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bullet"]
+
+[ext_resource type="Script" uid="uid://bullet_script" path="res://scripts/bullet.gd" id="1_bullet"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bullet"]
+radius = 3.0
+
+[node name="Bullet" type="Area2D" unique_id=1]
+script = ExtResource("1_bullet")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2]
+self_modulate = Color(1, 1, 0, 1)
+scale = Vector2(1.0, 1.0)
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=22]
+color = Color(1, 1, 0, 1)
+energy = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=3]
+shape = SubResource("CircleShape2D_bullet")
+
+[node name="LifeTimer" type="Timer" parent="." unique_id=4]
+wait_time = 30.0
+one_shot = true
