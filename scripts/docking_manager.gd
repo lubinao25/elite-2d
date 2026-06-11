@@ -108,13 +108,32 @@ func _enter_station():
 	if not player:
 		return
 
+	var game = get_tree().root.get_node_or_null("Game")
+	if not game:
+		return
+
 	in_interior = true
 	set_docking_state(DockingState.INSIDE_STATION)
 	_set_hint("Přistaňte na padu %d" % assigned_pad, Vector2(20, 80))
 
-	var game = get_tree().root.get_node_or_null("Game")
-	if not game:
-		return
+	interior_scene = load(interior_scene_path).instantiate()
+	interior_scene.set_meta("assigned_pad", assigned_pad)
+	game.add_child(interior_scene)
+
+	# Nejdřív přesuň hráče, pak nastav pozici interiéru kolem hráče
+	player.global_position = Vector2(0, 380)
+	player.velocity = Vector2.ZERO
+
+	# Ujisti se že hráč je navrchu (nad interiérem)
+	player.z_index = 10
+
+	print("Vstoupil do stanice, pad: %d" % assigned_pad)
+
+	in_interior = true
+	set_docking_state(DockingState.INSIDE_STATION)
+	_set_hint("Přistaňte na padu %d" % assigned_pad, Vector2(20, 80))
+
+
 
 	interior_scene = load(interior_scene_path).instantiate()
 	# Předej číslo přiděleného padu interiéru

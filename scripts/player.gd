@@ -29,7 +29,6 @@ func _process(delta):
 		acceleration_input = 1.0
 	elif Input.is_action_pressed("down"):
 		acceleration_input = -1.0
-
 	# Update speed
 	if acceleration_input != 0.0:
 		current_speed = move_toward(current_speed, max_speed * acceleration_input, acceleration * delta)
