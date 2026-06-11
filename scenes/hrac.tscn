@@ -60,10 +60,10 @@ script = ExtResource("5_poi")
 
 [node name="TopRightStats" type="VBoxContainer" parent="CanvasLayer/HUD" unique_id=345678901]
 layout_mode = 0
-offset_left = 973.0
+offset_left = 958.0
 offset_top = 1.0
-offset_right = 1153.0
-offset_bottom = 91.0
+offset_right = 1138.0
+offset_bottom = 113.0
 size_flags_horizontal = 8
 
 [node name="FuelLabel" type="Label" parent="CanvasLayer/HUD/TopRightStats" unique_id=456789012]

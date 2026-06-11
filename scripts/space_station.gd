@@ -8,6 +8,13 @@ var poi: Node2D
 
 func _ready():
 	_create_poi()
+	area_entered.connect(_on_area_entered)
+
+	var station_manager = get_tree().root.get_node_or_null("Game/StationManager")
+	if station_manager:
+		station_manager.register_station(self)
+	else:
+		push_error("StationManager not found!")
 
 func _create_poi():
 	poi = Node2D.new()

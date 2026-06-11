@@ -4,21 +4,19 @@ extends Node2D
 @export var exit_zone_position: Vector2 = Vector2(0, -460)
 
 var parking_spots = [
-	Vector2(-200, -150),
-	Vector2(-200, 150),
-	Vector2(200, -150),
-	Vector2(200, 150),
+	Vector2(-200, -150),  # vlevo nahoře
+	Vector2(-200, 150),   # vlevo dole
+	Vector2(200, -150),   # vpravo nahoře
+	Vector2(200, 150),    # vpravo dole
 ]
-
-var station_menu: Control = null
-var landed: bool = false
+var occupied_spots = [false, false, false, false]
 
 func _ready():
 	_build_hangar()
 	_setup_exit_zone()
-	_setup_landing_zones()
 
 func _build_hangar():
+	# Podlaha
 	var floor_rect = ColorRect.new()
 	floor_rect.size = Vector2(700, 900)
 	floor_rect.position = Vector2(-350, -450)
@@ -26,14 +24,17 @@ func _build_hangar():
 	add_child(floor_rect)
 	floor_rect.z_index = -1
 
-	_add_wall(Vector2(0, -460), Vector2(700, 20))
-	_add_wall(Vector2(0, 460), Vector2(700, 20))
-	_add_wall(Vector2(-360, 0), Vector2(20, 900))
-	_add_wall(Vector2(360, 0), Vector2(20, 900))
+	# Zdi (4 strany) jako StaticBody2D
+	_add_wall(Vector2(0, -460), Vector2(700, 20))   # horní zeď
+	_add_wall(Vector2(0, 460), Vector2(700, 20))    # dolní zeď
+	_add_wall(Vector2(-360, 0), Vector2(20, 900))   # levá zeď
+	_add_wall(Vector2(360, 0), Vector2(20, 900))    # pravá zeď
 
+	# Parkovací místa
 	for i in range(parking_spots.size()):
 		_add_parking_spot(parking_spots[i], i + 1)
 
+	# Mřížkové čáry (dekorace)
 	_add_grid_lines()
 
 func _add_wall(pos: Vector2, size: Vector2):
@@ -46,6 +47,7 @@ func _add_wall(pos: Vector2, size: Vector2):
 	rect.size = size
 	shape.shape = rect
 	wall.add_child(shape)
+	# Vizuál zdi
 	var vis = ColorRect.new()
 	vis.size = size
 	vis.position = -size / 2
@@ -58,11 +60,15 @@ func _add_parking_spot(pos: Vector2, number: int):
 	spot.position = pos
 	spot.name = "ParkingSpot%d" % number
 
+	# Kruh - vnější
 	var outer = _make_circle_outline(80, Color(0.2, 0.5, 0.8, 0.6))
 	spot.add_child(outer)
+
+	# Kruh - vnitřní
 	var inner = _make_circle_outline(35, Color(0.2, 0.5, 0.8, 0.9))
 	spot.add_child(inner)
 
+	# Kříž uprostřed
 	var cross_h = ColorRect.new()
 	cross_h.size = Vector2(80, 2)
 	cross_h.position = Vector2(-40, -1)
@@ -75,6 +81,7 @@ func _add_parking_spot(pos: Vector2, number: int):
 	cross_v.color = Color(0.2, 0.5, 0.8, 0.5)
 	spot.add_child(cross_v)
 
+	# Číslo
 	var label = Label.new()
 	label.text = str(number)
 	label.position = Vector2(-6, -10)
@@ -85,6 +92,7 @@ func _add_parking_spot(pos: Vector2, number: int):
 
 func _make_circle_outline(radius: float, color: Color) -> Node2D:
 	var node = Node2D.new()
+	# Aproximace kruhu pomocí polygonu
 	var points = PackedVector2Array()
 	var segments = 32
 	for i in range(segments):
@@ -115,6 +123,7 @@ func _add_grid_lines():
 		add_child(line)
 
 func _setup_exit_zone():
+	# Area2D pro výstup (dveře nahoře)
 	var exit_area = Area2D.new()
 	exit_area.name = "ExitZone"
 	exit_area.position = exit_zone_position
@@ -125,6 +134,7 @@ func _setup_exit_zone():
 	shape.shape = rect
 	exit_area.add_child(shape)
 
+	# Vizuál dveří
 	var door_vis = ColorRect.new()
 	door_vis.size = exit_zone_size
 	door_vis.position = -exit_zone_size / 2
@@ -140,97 +150,8 @@ func _setup_exit_zone():
 	exit_area.body_entered.connect(_on_exit_zone_entered)
 	add_child(exit_area)
 
-func _setup_landing_zones():
-	for i in range(parking_spots.size()):
-		var area = Area2D.new()
-		area.name = "LandingZone%d" % (i + 1)
-		area.position = parking_spots[i]
-		area.set_meta("spot_index", i)
-
-		var shape = CollisionShape2D.new()
-		var circle = CircleShape2D.new()
-		circle.radius = 50.0
-		shape.shape = circle
-		area.add_child(shape)
-
-		area.body_entered.connect(_on_landing_zone_entered.bind(i))
-		area.body_exited.connect(_on_landing_zone_exited.bind(i))
-		add_child(area)
-
-func _on_landing_zone_entered(body, spot_index: int):
-	if body.name == "Hrac" and not landed:
-		landed = true
-		body.velocity = Vector2.ZERO
-		body.set_physics_process(false)
-		print("Přistál na místě %d" % (spot_index + 1))
-		_show_station_menu()
-
-func _on_landing_zone_exited(body, _spot_index: int):
-	if body.name == "Hrac":
-		landed = false
-
-func _show_station_menu():
-	if station_menu:
-		return
-
-	station_menu = Control.new()
-	station_menu.set_anchors_preset(Control.PRESET_CENTER)
-	station_menu.z_index = 10
-
-	var panel = PanelContainer.new()
-	panel.position = Vector2(-150, -120)
-	panel.custom_minimum_size = Vector2(300, 240)
-	station_menu.add_child(panel)
-
-	var vbox = VBoxContainer.new()
-	vbox.add_theme_constant_override("separation", 12)
-	panel.add_child(vbox)
-
-	var title = Label.new()
-	title.text = "== STANICE =="
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title.add_theme_color_override("font_color", Color(0.5, 0.8, 1.0))
-	vbox.add_child(title)
-
-	var btn_trade = Button.new()
-	btn_trade.text = "Obchod"
-	btn_trade.pressed.connect(_on_menu_trade)
-	vbox.add_child(btn_trade)
-
-	var btn_repair = Button.new()
-	btn_repair.text = "Opravit loď"
-	btn_repair.pressed.connect(_on_menu_repair)
-	vbox.add_child(btn_repair)
-
-	var btn_leave = Button.new()
-	btn_leave.text = "Odletět"
-	btn_leave.pressed.connect(_on_menu_leave)
-	vbox.add_child(btn_leave)
-
-	add_child(station_menu)
-
-func _hide_station_menu():
-	if station_menu:
-		station_menu.queue_free()
-		station_menu = null
-
-func _on_menu_trade():
-	print("TODO: otevřít obchod")
-
-func _on_menu_repair():
-	print("TODO: opravit loď")
-
-func _on_menu_leave():
-	_hide_station_menu()
-	landed = false
-	var player = get_tree().root.get_node_or_null("Game/Hrac")
-	if player:
-		player.set_physics_process(true)
-	if DockingManager:
-		DockingManager.request_exit_docking()
-
 func _on_exit_zone_entered(body):
 	if body.name == "Hrac":
-		_hide_station_menu()
+		print("Player exiting station...")
 		if DockingManager:
 			DockingManager.request_exit_docking()

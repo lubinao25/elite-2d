@@ -50,4 +50,4 @@ func _draw():
 		var distance_to_screen = screen_pos.distance_to(screen_center)
 		
 		if distance_to_screen < 2000:
-			draw_circle(screen_pos, 1.0, Color.WHITE)
+			draw_circle(screen_pos, 1.0, Color.BLACK)
