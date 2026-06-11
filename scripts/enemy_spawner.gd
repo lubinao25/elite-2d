@@ -18,8 +18,10 @@ func _process(delta):
 
 	var player = get_tree().root.get_node_or_null("Game/Hrac")
 	if player and enemies.size() < max_enemies and time_since_last_spawn >= spawn_rate:
-		_spawn_enemy(player.global_position)
+		if not DockingManager or not DockingManager.in_interior:
+			_spawn_enemy(player.global_position)
 		time_since_last_spawn = 0.0
+ 
 
 func _spawn_enemy(player_pos: Vector2):
 	if not enemy_scene:

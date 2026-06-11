@@ -1,2 +1,4 @@
-res://scenes/Game.tscn
-res://scripts/starfield.gd
+res://scenes/hrac.tscn
+res://scripts/docking_manager.gd
+res://scripts/station_interior.gd
+res://scripts/player.gd

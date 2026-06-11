@@ -1,9 +1,0 @@
-res://scenes/Game.tscn
-res://scripts/station_interior.gd
-res://scripts/station_interface.gd
-res://scenes/StationInterior.tscn
-res://scripts/player.gd
-res://scripts/docking_manager.gd
-res://scripts/enemy_ship.gd
-res://scripts/enemy_spawner.gd
-res://scripts/space_station.gd

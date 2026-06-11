@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
 @export var max_speed: float = 300.0
-@export var acceleration: float = 150.0
-@export var deceleration: float = 150.0
+@export var acceleration: float = 500.0
 @export var rotation_speed: float = 3.5
+@export var friction: float = 200.0
 @export var fire_rate: float = 0.2
 @export var bullet_damage: float = 10.0
 
@@ -23,20 +23,21 @@ func _process(delta):
 	if Input.is_action_pressed("right"):
 		rotation -= rotation_speed * delta
 
-	# Handle speed changes with W and S keys
+	# Handle acceleration/deceleration
+	var acceleration_input = 0.0
 	if Input.is_action_pressed("up"):
-		# Accelerate forward (W key)
-		current_speed = move_toward(current_speed, max_speed, acceleration * delta)
+		acceleration_input = 1.0
 	elif Input.is_action_pressed("down"):
-		# Decelerate or go in reverse (S key)
-		current_speed = move_toward(current_speed, -max_speed, deceleration * delta)
-	else:
-		# Speed remains constant when no input
-		pass
+		acceleration_input = -1.0
 
-	# Consume fuel based on current speed
+	# Update speed
+	if acceleration_input != 0.0:
+		current_speed = move_toward(current_speed, max_speed * acceleration_input, acceleration * delta)
+	else:
+		current_speed = move_toward(current_speed, 0.0, friction * delta)
+
+	# Consume fuel based on movement
 	if current_speed != 0.0 and PlayerStats:
-		# Higher speed = higher fuel consumption
 		var fuel_cost = PlayerStats.fuel_consumption_rate * delta * (abs(current_speed) / max_speed)
 		if not PlayerStats.consume_fuel(fuel_cost):
 			current_speed = 0.0
@@ -50,7 +51,7 @@ func _process(delta):
 	velocity = direction_vector * current_speed
 
 	# Move the ship
-	position += velocity * delta
+	move_and_slide()
 
 	# Handle shooting
 	time_since_last_shot += delta
